@@ -1,11 +1,22 @@
 <h1>HTML heading</h1>
 ## Heading 2
 
+un_frigging_believable
+un__frigging__believable
+
+This is **so
+frigging** cool.
+
+\*This text has literal asterisks around it.\*
+\_\_This text has literal underscores around it.\_
+
 * item 1
 Still in item 1
+
 * item 2
-more for item 2.
-still some more
+> blockquote within item 2
+> still in the blockquote
+
 * * nested item 3
 * * nested item 3 1/2
 * item 4
@@ -15,10 +26,10 @@ still some more
 > blah
 > 
 > > AT&T
-> foo
-bar
+> 
+> bar
 
-<chadbraunduin@gmail.com>
+<user@gmail.com>
 
 This is an example of a reference style [LINK][].
 This is [Another link][42].
@@ -26,14 +37,10 @@ This is [Another link][42].
 [link]: http://chadbraunduin.com/ "My Site"
 
 I like to use the `printf('asdf')` function.
+A literal backtick within a code block `` ` `` works.
 
 setext
 ---
-
-un*frigging*believable
-
-This is **so
-freaking** cool.
 
 > foo
 >     printf('Hello, World!');
@@ -52,6 +59,8 @@ This is some html
 <hr />
 4 < 5 > 3 \ ` * _ { } [ ] ( ) # + - . !
 
+\\ escaped \\
+
 ___
 
 ###### Heading other1 #
@@ -61,13 +70,13 @@ ___
 
 [Link with title](http://example.com "Example")
 [Link](http://example.com)
-![Image](http://example.com/your-mom.jpg)
+![Image](http://example.com/sammy.jpg)
 [Relative Path](/example)
 
-Your mom
+Yet another paragraph
 
-![Luge](/path/to/cat/luge.jpg)
-![Kitty](/path/to/cat/pic.jpg "Sammy as a Kitten")
+![Luge](/path/to/cat/pic.jpg)
+![Kitty](/path/to/cat/pic.jpg "Sammy the cat")
 
 <address@example.com>
 <https://example.com>
@@ -75,9 +84,9 @@ Your mom
 <http://example.com>
 
 1. sammy
-12. babe
+12. kitty
     <div class="foo">
-	babe is a babe
+	kitty is a cat
 	</div>
 1. talu
 1. 1. Nested

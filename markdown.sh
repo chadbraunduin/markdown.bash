@@ -1,8 +1,11 @@
 #!/bin/bash
 
-# All of this below business is for reference-style links and images
+# move the original text to a temp file that can be progressively modified
 temp_file="/tmp/markdown.$$"
 cat "$@" > "$temp_file"
+
+# All of this below business is for reference-style links and images
+# We need to loop across newlines and not spaces
 IFS='
 '
 refs=$(sed -nr "/^\[.+\]: +/p" "$@")
@@ -51,9 +54,9 @@ p
 ' "$temp_file"
 done
 
-# setext-style headers
+# Setext-style headers
 sed -nri '
-# setext-style headers need to be wrapped around newlines
+# Setext-style headers need to be wrapped around newlines
 /^$/ b print
 
 # else, append to holding area
@@ -78,7 +81,7 @@ p
 
 sed -i '1 d' "$temp_file" # cleanup superfluous first line
 
-# headers and other block styles
+# atx-style headers and other block styles
 sed -ri '
 /^#+ /s/ #+$// # kill all ending header characters
 /^# /s/# (.*)/<h1>\1<\/h1>/g # H1
@@ -95,6 +98,7 @@ sed -ri '
 ' "$temp_file"
 
 # unordered lists
+# use grep to find all the nested lists
 while grep '^[\*\+\-] ' "$temp_file" >/dev/null
 do
 sed -nri '
@@ -133,6 +137,7 @@ sed -ri '/^[\*\+\-] /s/(.*)/\n\1\n/' "$temp_file"
 done
 
 # ordered lists
+# use grep to find all the nested lists
 while grep -E '^[1-9]+\. ' "$temp_file" >/dev/null
 do
 sed -nri '
@@ -140,6 +145,7 @@ sed -nri '
 /^$/b list
 
 # wrap the li tags then add to the hold buffer
+# use oli instead of li to avoid collisions when processing nested lists
 /^[1-9]+\. /s/[1-9]+\. (.*)/<\/oli>\n<oli>\n\1/
 
 H
@@ -161,7 +167,7 @@ p
 
 sed -i '1 d' "$temp_file" # cleanup superfluous first line
 
-# convert list items into proper list items
+# convert list items into proper list items to avoid collisions with nested lists
 sed -i 's/oli>/li>/g' "$temp_file"
 
 # prepare any nested lists
@@ -242,9 +248,9 @@ b
 :emphasis
 x
 s/\*\*(.+)\*\*/<strong>\1<\/strong>/g
-s/__(.+)__/<strong>\1<\/strong>/g
+s/__([^_]+)__/<strong>\1<\/strong>/g
 s/\*([^\*]+)\*/<em>\1<\/em>/g
-s/_([^_]+)_/<em>\1<\/em>/g
+s/([^\\])_([^_]+)_/\1<em>\2<\/em>/g
 p
 ' "$temp_file"
 
@@ -305,9 +311,8 @@ s/<(http[s]?:\/\/.*)>/<a href=\"\1\">\1<\/a>/g # automatic links
 s/<(.*@.*\..*)>/<a href=\"mailto:\1\">\1<\/a>/g # automatic email address links
 
 # inline code
-s/``+ *([^ ]*) *``+/<code>\1<\/code>/g
-s/`(.*)`/<code>\1<\/code>/g
-s/\\`/`/g
+s/([^\\])``+ *([^ ]*) *``+/\1<code>\2<\/code>/g
+s/([^\\])`(.*)`/\1<code>\2<\/code>/g
 
 s/!\[(.*)\]\((.*) \"(.*)\"\)/<img alt=\"\1\" src=\"\2\" title=\"\3\" \/>/g # inline image with title
 s/!\[(.*)\]\((.*)\)/<img alt=\"\1\" src=\"\2\" \/>/g # inline image without title
@@ -318,6 +323,15 @@ s/\[(.*)]\((.*)\)/<a href=\"\2\">\1<\/a>/g # inline link
 # special characters
 /&.+;/!s/&/\&amp;/g # ampersand
 /<[\/a-zA-Z]/!s/</\&lt;/g# less than bracket
+
+# backslash escapes for literal characters
+s/\\\*/\*/g # asterisk
+s/\\_/_/g # underscore
+s/\\`/`/g # underscore
+s/\\#/#/g # pound or hash
+s/\\\+/\+/g # plus
+s/\\\-/\-/g # minus
+s/\\\\/\\/g # backslash
 ' "$temp_file"
 
 # display and cleanup
