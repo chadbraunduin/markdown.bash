@@ -12,11 +12,10 @@ frigging** cool.
 
 * item 1
 Still in item 1
-
 * item 2
 > blockquote within item 2
 > still in the blockquote
-
+* 
 * * nested item 3
 * * nested item 3 1/2
 * item 4
