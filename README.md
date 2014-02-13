@@ -16,10 +16,7 @@ You use it just like any other Unix program - by either passing files to it or p
 By my own rough estimate, markdown.bash implements about 95% of the Markdown language. Still there are some areas where it doesn't.
 
 * It doesn't convert E-mail addresses to a mix of decimal and hex entity-encoding. I really did not know a good, canonical way to do this in Unix/Linux. Suggestions are welcome.
-* It processes Markdown inside block-level HTML. According to the original spec:
-> Note that Markdown formatting syntax is not processed within block-level HTML tags. E.g., you can’t use Markdown-style *emphasis* inside an HTML block.
-
-markdown.bash does, in fact, process Markdown syntax within block-level HTML. I couldn't think of a good way to implement this exactly like the spec.
+* It processes Markdown inside block-level HTML. According to the original spec: Note that Markdown formatting syntax is not processed within block-level HTML tags. E.g., you can’t use Markdown-style *emphasis* inside an HTML block. markdown.bash does process Markdown syntax within block-level HTML. I couldn't think of a good way to implement this exactly like the spec.
 
 * Due to the line-by-line processing nature of Sed, I recommend always putting hard breaks (\\n\\n) between block-level elements (lists, paragraphs, etc). markdown.bash does a lot less implicit processing of elements separated by only one break (\\n) than the Perl version does.
 
