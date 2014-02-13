@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# uncomment the following two lines if you have both BSD sed and GNU sed installed
+# this script is only tested to work with GNU sed which may have the command gsed
+# shopt -s expand_aliases
+# alias sed=gsed
+
 # move the original text to a temp file that can be progressively modified
 temp_file="/tmp/markdown.$$"
 cat "$@" > "$temp_file"
