@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A Markdown interpreter using only traditional Unix tools",
   "global": "true",
-  "install": "install markdown.sh /usr/local/markdown",
+  "install": "install markdown.sh /usr/local/bin/markdown",
   "scripts": [ "markdown.sh" ]
 }
 
