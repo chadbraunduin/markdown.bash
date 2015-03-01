@@ -26,6 +26,15 @@ Before starting this project I had only a cursory understanding of Sed. I'm stil
 * [Sed - An Introduction and Tutorial][3]
 * [Unix Sed Tutorial][4]
 
+## Known issues
+This script only works with GNU sed. So if you have both BSD sed and GNU sed installed (often happens on OSX), you will need to alias GNU sed. If you get the following error running this script, you will need to apply this fix.
+
+    sed: illegal option -- r
+	
+The least intrusive way to apply this fix is to uncomment the following two lines at the top of markdown.sh.
+
+    shopt -s expand_aliases
+	alias sed=gsed
 
 [1]: http://stackoverflow.com/questions/2798123/markdown-why-are-there-numerous-implementations-of-the-markdown-markup-langua
 [2]: http://daringfireball.net/projects/markdown/
