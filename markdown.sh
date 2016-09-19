@@ -227,7 +227,7 @@ b # else, branch to the end of the script
 x
 # look for the code items, if there wrap the pre-code tags
 /\t| {4}/{
-s/(\t| {4})(.*)/<pre><code>\n\1\2\n<\/code><\/pre>/ # wrap the ending tags
+s/(\t| {4})(.*)/<pre><code>\1\2<\/code><\/pre>/ # wrap the ending tags
 p
 b
 }
@@ -341,7 +341,7 @@ s/<(.*@.*\..*)>/<a href=\"mailto:\1\">\1<\/a>/g # automatic email address links
 
 # inline code
 s/([^\\])``+ *([^ ]*) *``+/\1<code>\2<\/code>/g
-s/([^\\])`(.*)`/\1<code>\2<\/code>/g
+s/([^\\])`([^`]*)`/\1<code>\2<\/code>/g
 
 s/!\[(.*)\]\((.*) \"(.*)\"\)/<img alt=\"\1\" src=\"\2\" title=\"\3\" \/>/g # inline image with title
 s/!\[(.*)\]\((.*)\)/<img alt=\"\1\" src=\"\2\" \/>/g # inline image without title
