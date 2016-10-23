@@ -265,7 +265,7 @@ N
 }
 ' "$temp_file"
 
-# emphasis and strong emphasis
+# emphasis and strong emphasis and strikethrough
 sed -nri '
 # batch up the entire stream of text until a line break in the action
 /^$/b emphasis
@@ -280,6 +280,7 @@ s/\*\*(.+)\*\*/<strong>\1<\/strong>/g
 s/__([^_]+)__/<strong>\1<\/strong>/g
 s/\*([^\*]+)\*/<em>\1<\/em>/g
 s/([^\\])_([^_]+)_/\1<em>\2<\/em>/g
+s/\~\~(.+)\~\~/<strike>\1<\/strike>/g
 p
 ' "$temp_file"
 
