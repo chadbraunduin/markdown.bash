@@ -227,7 +227,7 @@ b # else, branch to the end of the script
 x
 # look for the code items, if there wrap the pre-code tags
 /\t| {4}/{
-s/(\t| {4})(.*)/<pre><code>\1\2<\/code><\/pre>/ # wrap the ending tags
+s/(\t| {4})(.*)/<pre><code>\n\1\2\n<\/code><\/pre>/ # wrap the ending tags
 p
 b
 }
