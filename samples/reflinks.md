@@ -8,4 +8,4 @@ This is [a link to Google][google] and [a link to Yahoo][yahoo] and [another lin
 Look at ![Cat pic][1] and ![Cat pic][1] and ![Doc pic][2]
 
 [1]: /images/cat.png "Cat"
-[2]: /images/dog/png "Dog"
+[2]: /images/dog.png "Dog"
